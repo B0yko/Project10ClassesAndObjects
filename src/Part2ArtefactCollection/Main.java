@@ -133,16 +133,25 @@ class Collection {
             System.out.println("Collection is full. Cannot add more drums.");
         }
     }
-
-    public void printOne(int i) {
+    // Method to output the full description of the one drum
+   public void printOne(int i) {
         if (i >= 0 && i < count) {
-            System.out.println(drums[i]);
+            System.out.println("Drum: " + (i+1) + ":");
+            System.out.println("Manufacturer: " + drums[i].getManufacturer());
+            System.out.println("Model: " + drums[i].getModel());
+            System.out.println("Producing country: " + drums[i].getProducingCountry());
+            System.out.println("Type: " + drums[i].getType());
+            System.out.println("Material: " + drums[i].getMaterial());System.out.println("Color: " + drums[i].getColor());
+            System.out.println("Price: $" + drums[i].getPrice());
+            System.out.println("Radius: " + drums[i].getRadius() + "\"");
+            System.out.println("Year of purchase: " + drums[i].getYearOfPurchase());
+            System.out.println("Age: " + drums[i].getAge(2018));System.out.println();
         } else {
             System.out.println("Invalid index.");
         }
     }
 
-    // Method to output the full description of the book
+    // Method to output the full description of the drums
     public String print() {
         for (int i = 0; i < count; i++) {
             System.out.println("Drum: " + (i + 1) + ":");
@@ -257,10 +266,11 @@ public class Main {
             System.out.println("Menu:");
             System.out.println("1. Add drum to collection");
             System.out.println("2. Print all drums");
-            System.out.println("3. Sort drums by price");
-            System.out.println("4. Search in drums by type");
-            System.out.println("5. Search in drums by price");
-            System.out.println("6. Exit");
+            System.out.println("3. Print one drum");
+            System.out.println("4. Sort drums by price");
+            System.out.println("5. Search in drums by type");
+            System.out.println("6. Search in drums by price");
+            System.out.println("7. Exit");
             System.out.print("Choose an option: ");
 
             int number = in.nextInt();
@@ -273,15 +283,18 @@ public class Main {
                     printAllDrums(collection);
                     break;
                 case 3:
-                    sortByPrice(collection, in);
+                    printOne(collection, in);
                     break;
                 case 4:
-                    searchByType(collection, in);
+                    sortByPrice(collection, in);
                     break;
                 case 5:
-                    searchByPrice(collection, in);
+                    searchByType(collection, in);
                     break;
                 case 6:
+                    searchByPrice(collection, in);
+                    break;
+                case 7:
                     System.out.println("Thanks for using our program!");
                     System.exit(0);
                 default:
@@ -327,6 +340,11 @@ public class Main {
     public static void printAllDrums(Collection collection) {
         System.out.println("Printing all drums in collection: ");
         collection.print();
+    }
+    public static void printOne(Collection collection, Scanner in) {
+        System.out.println("Enter a number of the drum: ");
+        int i = in.nextInt();
+        collection.printOne(i-1);
     }
     public static void sortByPrice(Collection collection, Scanner in) {
         System.out.println("Sorting drums by price...");
